@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { register } from "./../serviceWorker";
+import * as userService from "../services/userService";
 
 class RegisterForm extends Form {
   state = {
@@ -9,14 +9,21 @@ class RegisterForm extends Form {
     errors: {},
   };
   schema = {
-    username: Joi.string().required().email().label("Username"),
-    password: Joi.string().required().min(5).label("Password"), //minimum 5 characters
-    name: Joi.string().required().label("Name"),
+    username: Joi.string()
+      .required()
+      .email()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .min(5)
+      .label("Password"), //minimum 5 characters
+    name: Joi.string()
+      .required()
+      .label("Name"),
   };
 
-  doSubmit = () => {
-    //call server
-    console.log("Submitted");
+  doSubmit = async () => {
+    await userService.register(this.state.data);
   };
 
   render() {
