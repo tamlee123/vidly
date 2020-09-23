@@ -4,10 +4,11 @@ import { apiUrl } from "../config.json";
 
 const apiEndpoint = apiUrl + "/auth";
 const tokenKey = "token";
+
 http.setJwt(getJwt());
 
 export async function login(email, password) {
-  const { data: jwt } = http.post(apiEndpoint, { email, password });
+  const { data: jwt } = await http.post(apiEndpoint, { email, password });
   localStorage.setItem(tokenKey, jwt);
 }
 
