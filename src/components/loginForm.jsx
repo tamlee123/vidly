@@ -11,6 +11,7 @@ class LoginForm extends Form {
   };
   schema = {
     username: Joi.string()
+      // Hello I am alvin yummy
       .required()
       .label("Username"),
     password: Joi.string()
